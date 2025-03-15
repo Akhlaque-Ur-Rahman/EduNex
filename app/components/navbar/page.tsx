@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <nav className="w-full bg-white shadow-sm p-4">
       <div className="flex items-center justify-between">
-        <div className="text-xl font-bold w-1/4">EduNex</div>
+        <div className="text-xl font-bold w-1/4">EduNex 2.0</div>
 
         {/* Mobile menu button */}
         <button 
