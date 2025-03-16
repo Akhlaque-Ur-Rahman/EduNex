@@ -1,73 +1,85 @@
 'use client';
-
-import React, { useState } from 'react'
+import { FC, useState } from "react";
+import { usePathname, useRouter } from 'next/navigation';
+import { X, Menu } from "lucide-react";
+import { FaFacebook, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import Link from "next/link";
+import Image from "next/image";
+import logo from "../../resources/EduNexLogo.svg";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const Navbar: FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const isActive = (path: string) => pathname === path;
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  const handleNavigation = (path: string) => {
+    if (path === 'home') path = '/';
+    router.push(path);
+    closeMobileMenu();
+  };
 
   return (
-    <nav className="w-full bg-white shadow-sm p-4">
-      <div className="flex items-center justify-between">
-        <div className="text-xl font-bold w-1/4">EduNex 2.0</div>
-
-        {/* Mobile menu button */}
-        <button 
-          className="md:hidden p-2 ml-auto" // Added ml-auto to push to extreme right
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {isOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-
-        {/* Desktop menu */}
-        <div className="hidden md:flex items-center gap-8 justify-center w-2/4">
-          <Link href="/" className="relative hover:text-emerald-600 transition-colors after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-emerald-600 after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform">
-            Home
-          </Link>
-          <Link href="/career" className="relative hover:text-emerald-600 transition-colors after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-emerald-600 after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform">
-            Career
-          </Link>
-          <Link href="/achievements" className="relative hover:text-emerald-600 transition-colors after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-emerald-600 after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform">
-            Achievements
-          </Link>
-          <Link href="/about" className="relative hover:text-emerald-600 transition-colors after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-emerald-600 after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform">
-            About
-          </Link>
-          <Link href="/contact" className="relative hover:text-emerald-600 transition-colors after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-emerald-600 after:left-0 after:bottom-0 after:scale-x-0 hover:after:scale-x-100 after:transition-transform">
-            Contact
-          </Link>
+    <nav className="flex items-center justify-between px-4 py-2 bg-white shadow-md w-full">
+      <div className="flex items-center justify-between mx-4 w-full lg:w-auto">
+        <div onClick={() => handleNavigation('/')} className="cursor-pointer">
+          <Image src={logo} alt="EDUNEX Logo" width={60} priority />
         </div>
-        <div className="w-1/4 hidden md:block"></div> {/* Spacer div for balance, hidden on mobile */}
-      </div>
 
-      {/* Mobile menu */}
-      <div className={`${isOpen ? 'block' : 'hidden'} md:hidden mt-4`}>
-        <div className="flex flex-col items-center gap-4">
-          <Link href="/" className="hover:text-emerald-600 transition-colors">
-            Home
-          </Link>
-          <Link href="/career" className="hover:text-emerald-600 transition-colors">
-            Career
-          </Link>
-          <Link href="/achievements" className="hover:text-emerald-600 transition-colors">
-            Achievements
-          </Link>
-          <Link href="/about" className="hover:text-emerald-600 transition-colors">
-            About
-          </Link>
-          <Link href="/contact" className="hover:text-emerald-600 transition-colors">
-            Contact
-          </Link>
+        <div className="lg:hidden">
+          {isMobileMenuOpen ? (
+            <X className="w-6 h-6 cursor-pointer" onClick={toggleMobileMenu} />
+          ) : (
+            <Menu className="w-6 h-6 cursor-pointer" onClick={toggleMobileMenu} />
+          )}
         </div>
       </div>
+
+      <div className="hidden lg:flex items-center gap-6 text-gray-700">
+        {['Home', 'Services', 'Clients', 'Contact'].map((item) => (
+          <div key={item} onClick={() => handleNavigation(item.toLowerCase() === 'home' ? '/' : `/${item.toLowerCase()}`)}
+            className={`relative cursor-pointer ${isActive(item.toLowerCase() === 'home' ? '/' : `/${item.toLowerCase()}`) ? 'text-black font-bold underline' : ''} hover:underline`}>
+            {item}
+          </div>
+        ))}
+      </div>
+
+      <div className="hidden lg:flex items-center gap-4">
+        <FaFacebook className="w-6 h-6 cursor-pointer" />
+        <FaInstagram className="w-6 h-6 cursor-pointer" />
+        <FaLinkedinIn className="w-6 h-6 cursor-pointer" />
+        <FaXTwitter className="w-6 h-6 cursor-pointer" />
+      </div>
+
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 bg-white z-50 flex flex-col w-full p-4">
+          <div className="flex justify-between items-center mb-6">
+            <div onClick={() => handleNavigation('/')} className="cursor-pointer">
+              <Image src={logo} alt="EDUNEX Logo" height={60} priority />
+            </div>
+            <X className="w-6 h-6 cursor-pointer" onClick={toggleMobileMenu} />
+          </div>
+          <div className="flex flex-col items-start gap-4 mb-10">
+            {['Home', 'Services', 'Clients', 'Contact Us'].map((item) => (
+              <div key={item} onClick={() => handleNavigation(item.toLowerCase() === 'home' ? '/' : `/${item.toLowerCase().replace(' ', '')}`)}
+                className={`text-lg cursor-pointer ${isActive(item.toLowerCase() === 'home' ? '/' : `/${item.toLowerCase().replace(' ', '')}`) ? 'text-black font-bold underline' : ''} hover:underline`}>
+                {item}
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-6 mt-8">
+            <FaFacebook className="w-6 h-6 cursor-pointer" />
+            <FaInstagram className="w-6 h-6 cursor-pointer" />
+            <FaLinkedinIn className="w-6 h-6 cursor-pointer" />
+            <FaXTwitter className="w-6 h-6 cursor-pointer" />
+          </div>
+        </div>
+      )}
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

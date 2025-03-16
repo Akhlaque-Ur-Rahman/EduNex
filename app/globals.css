@@ -10,10 +10,7 @@ body,html{
   width:100%;
 
 }
-nav{
-  padding: .2rem .5rem;
+body{
+  /* padding: 0 1rem; */
 }
-.loginsign-btn{
-  padding: .2rem .5rem;
-  
-}
+
