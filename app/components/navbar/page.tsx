@@ -23,7 +23,6 @@ const Navbar: FC = () => {
       setIsScrolled(window.scrollY > 0);
     };
     window.addEventListener('scroll', handleScroll);
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -32,16 +31,31 @@ const Navbar: FC = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 bg-white w-full transition-shadow duration-300 ${
-        isScrolled ? 'shadow-md' : ''
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 bg-white shadow-md ${isScrolled ? 'shadow-lg' : ''}`}
     >
-      <div className="flex items-center justify-between w-full px-4 py-2">
-        
-        {/* Logo */}
-        <div className="flex items-center gap-6">
+      <div className="flex items-center justify-between px-4 py-2">
+        {/* Mobile Mode: Menu Icon & Logo */}
+        <div className="flex items-center justify-between w-full lg:hidden relative z-50">
+          {!isMobileMenuOpen ? (
+            <Menu className="w-6 h-6 cursor-pointer" onClick={toggleMobileMenu} />
+          ) : (
+            <X className="w-6 h-6 cursor-pointer absolute left-0" onClick={toggleMobileMenu} />
+          )}
           <Image
-            src='/resources/EduNexLogo.svg'
+            src="/resources/EduNexLogo.svg"
+            alt="EDUNEX Logo"
+            width={60}
+            height={60}
+            priority
+            onClick={() => handleNavigation('/')}
+            className="cursor-pointer ml-auto"
+          />
+        </div>
+
+        {/* Desktop Mode: Logo, Nav Links, Social Icons */}
+        <div className="hidden lg:flex items-center justify-between w-full">
+          <Image
+            src="/resources/EduNexLogo.svg"
             alt="EDUNEX Logo"
             width={60}
             height={60}
@@ -50,28 +64,14 @@ const Navbar: FC = () => {
             className="cursor-pointer"
           />
 
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden">
-            {!isMobileMenuOpen ? (
-              <Menu className="w-6 h-6 cursor-pointer" onClick={toggleMobileMenu} />
-            ) : (
-              <X className="w-6 h-6 cursor-pointer" onClick={toggleMobileMenu} />
-            )}
-          </div>
-        </div>
-        
-        {/* Navigation Links and Social Icons - Desktop */}
-        <div className="hidden lg:flex items-center gap-8 ml-auto pr-8">
-          <div className="flex items-center gap-6">
-            {/* Navigation Links */}
+          <div className="flex items-center gap-6 ml-auto">
             <div onClick={() => handleNavigation('home')} className={`cursor-pointer ${pathname === '/' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Home</div>
             <div onClick={() => handleNavigation('services')} className={`cursor-pointer ${pathname === '/services' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Services</div>
             <div onClick={() => handleNavigation('clients')} className={`cursor-pointer ${pathname === '/clients' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Clients</div>
             <div onClick={() => handleNavigation('contact')} className={`cursor-pointer ${pathname === '/contact' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Contact</div>
           </div>
 
-          {/* Social Icons */}
-          <div className="flex items-center gap-4 ml-6">
+          <div className="flex items-center gap-4 pr-4 ml-6">
             <FaFacebook className="w-6 h-6 cursor-pointer" />
             <FaInstagram className="w-6 h-6 cursor-pointer" />
             <FaLinkedinIn className="w-6 h-6 cursor-pointer" />
@@ -82,21 +82,27 @@ const Navbar: FC = () => {
 
       {/* Mobile Menu Drawer */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-white z-40 flex flex-col w-[80%] h-[80%] p-4 transition-transform duration-300 transform">
-          <div className="flex flex-col items-start gap-4 mt-8 ml-4">
+        <motion.div
+          initial={{ x: '-100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '-100%' }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 bg-white z-40 flex flex-col w-[85%] h-full p-4"
+        >
+          <div className="flex flex-col items-start gap-4 mt-11">
             <div onClick={() => handleNavigation('home')} className={`text-lg cursor-pointer ${pathname === '/' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Home</div>
             <div onClick={() => handleNavigation('services')} className={`text-lg cursor-pointer ${pathname === '/services' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Services</div>
             <div onClick={() => handleNavigation('clients')} className={`text-lg cursor-pointer ${pathname === '/clients' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Clients</div>
             <div onClick={() => handleNavigation('contact')} className={`text-lg cursor-pointer ${pathname === '/contact' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Contact</div>
           </div>
 
-          <div className="flex gap-6 mt-8 ml-4">
+          <div className="flex gap-6 mt-8">
             <FaFacebook className="w-6 h-6 cursor-pointer" />
             <FaInstagram className="w-6 h-6 cursor-pointer" />
             <FaLinkedinIn className="w-6 h-6 cursor-pointer" />
             <FaXTwitter className="w-6 h-6 cursor-pointer" />
           </div>
-        </div>
+        </motion.div>
       )}
     </motion.nav>
   );
