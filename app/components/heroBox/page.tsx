@@ -64,6 +64,7 @@ const HeroBox = () => {
           </div>
         </div>
       </motion.div>
+      
     </div>
   );
 };
