@@ -81,29 +81,63 @@ const Navbar: FC = () => {
       </div>
 
       {/* Mobile Menu Drawer */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ x: '-100%' }}
-          animate={{ x: 0 }}
-          exit={{ x: '-100%' }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 bg-white z-40 flex flex-col w-[85%] h-full p-4"
-        >
-          <div className="flex flex-col items-start gap-4 mt-11">
-            <div onClick={() => handleNavigation('home')} className={`text-lg cursor-pointer ${pathname === '/' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Home</div>
-            <div onClick={() => handleNavigation('services')} className={`text-lg cursor-pointer ${pathname === '/services' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Services</div>
-            <div onClick={() => handleNavigation('clients')} className={`text-lg cursor-pointer ${pathname === '/clients' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Clients</div>
-            <div onClick={() => handleNavigation('contact')} className={`text-lg cursor-pointer ${pathname === '/contact' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>Contact</div>
-          </div>
+      {/* Mobile Menu Drawer */}
+{/* Mobile Menu Drawer */}
+{/* Mobile Menu Drawer */}
+{isMobileMenuOpen && (
+  <motion.div
+    initial={{ x: '-100%' }}
+    animate={{ x: 0 }}
+    exit={{ x: '-100%' }}
+    transition={{ duration: 0.3 }}
+    className="fixed inset-0 bg-white z-40 flex flex-col w-[80%] h-[80%] p-2 transition-transform duration-300 transform"
+  >
+    {/* X Icon */}
+    <div className="flex justify-end mb-4 mr-4">
+      <X 
+        className="w-6 h-6 cursor-pointer mb-4"
+        onClick={toggleMobileMenu}
+      />
+    </div>
 
-          <div className="flex gap-6 mt-8">
-            <FaFacebook className="w-6 h-6 cursor-pointer" />
-            <FaInstagram className="w-6 h-6 cursor-pointer" />
-            <FaLinkedinIn className="w-6 h-6 cursor-pointer" />
-            <FaXTwitter className="w-6 h-6 cursor-pointer" />
-          </div>
-        </motion.div>
-      )}
+    {/* Navigation Links */}
+    <div className="flex flex-col items-start gap-4 mt-4 ml-4">
+      <div onClick={() => handleNavigation('home')} className={`text-lg cursor-pointer ${pathname === '/' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>
+        Home
+      </div>
+      <div onClick={() => handleNavigation('services')} className={`text-lg cursor-pointer ${pathname === '/services' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>
+        Services
+      </div>
+      <div onClick={() => handleNavigation('clients')} className={`text-lg cursor-pointer ${pathname === '/clients' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>
+        Clients
+      </div>
+      <div onClick={() => handleNavigation('contact')} className={`text-lg cursor-pointer ${pathname === '/contact' ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}>
+        Contact
+      </div>
+    </div>
+
+    {/* Social Icons */}
+    <div className="flex gap-6 mt-8 ml-4">
+      <FaFacebook className="w-6 h-6 cursor-pointer" />
+      <FaInstagram className="w-6 h-6 cursor-pointer" />
+      <FaLinkedinIn className="w-6 h-6 cursor-pointer" />
+      <FaXTwitter className="w-6 h-6 cursor-pointer" />
+    </div>
+
+    {/* Sign Up Button */}
+    <div className="mt-6 ml-4">
+      <button 
+        onClick={() => handleNavigation('signup')} 
+        className="bg-emerald-600 text-white py-2 px-4 rounded hover:bg-emerald-700 transition-colors"
+      >
+        Sign Up
+      </button>
+    </div>
+  </motion.div>
+)}
+
+
+
     </motion.nav>
   );
 };
