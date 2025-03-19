@@ -1,17 +1,20 @@
 import React from 'react'
+import Image from 'next/image'
 import Card1 from '../card1/page'
 
-const heroBox = () => {
+const HeroBox = () => {
   return (
     <div className="relative">
       <div className="h-[calc(100vh-64px)]"> {/* Assuming navbar is 64px tall */}
         <div className="relative h-full w-full">
           {/* Hero Image */}
           <div className="absolute inset-0">
-            <img
-              src="/hero-image.jpg" 
+            <Image
+              src="/resources/car.jpg" // Corrected path
               alt="Hero background"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              priority
             />
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-black/50"></div>
@@ -37,12 +40,12 @@ const heroBox = () => {
       </div>
 
       {/* Cards Section - Suspended 50% out of hero section */}
-      <div className="absolute bottom-0 left-0 right-0 translate-y-1/2 z-20">
-        <div className="container mx-auto px-4">
-          <div className="flex gap-8 justify-center">
-            <div className="w-1/4"><Card1 /></div>
-            <div className="w-1/4"><Card1 /></div>
-            <div className="w-1/4"><Card1 /></div>
+      <div className="absolute bottom-0 left-0 right-0 translate-y-1/2 z-20 w-full">
+        <div className="mx-auto px-4 max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+            <div className="w-full sm:w-3/4 lg:w-full"><Card1 /></div>
+            <div className="w-full sm:w-3/4 lg:w-full"><Card1 /></div>
+            <div className="w-full sm:w-3/4 lg:w-full"><Card1 /></div>
           </div>
         </div>
       </div>
@@ -50,4 +53,4 @@ const heroBox = () => {
   )
 }
 
-export default heroBox
+export default HeroBox;
