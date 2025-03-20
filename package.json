@@ -17,6 +17,8 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.5",
+    "@use-gesture/react": "^10.3.1",
     "bootstrap-icons": "^1.11.3",
     "fontawesome": "^5.6.3",
     "framer-motion": "^12.5.0",
