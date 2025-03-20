@@ -24,33 +24,26 @@ const StackedCards: React.FC = () => {
   return (
     <div className="flex justify-center items-center mt-10">
       <div 
-        className="relative w-[500px] h-[300px] cursor-pointer" 
+        className="relative w-[450px] h-[280px] cursor-pointer"  // Landscape size
         onClick={handleCardClick}
       >
         {cards.map((image, index) => (
           <motion.div
             key={image}
-            className="absolute w-full h-full"
-            initial={{ y: index * -10 }}
-            animate={{ 
-              y: index * -10,
-              scale: 1 - index * 0.03
-            }}
-            whileHover={index === 0 ? { rotate: 1 } : {}}
+            className="absolute inset-0"
+            initial={{ x: index * 15, y: index * 10, scale: 1 - index * 0.05 }}
+            animate={{ x: index * 15, y: index * 10, scale: 1 - index * 0.05 }}
+            whileHover={{ scale: 1.05, rotate: 0.5 }}
             whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            style={{ 
-              zIndex: cards.length - index,
-              boxShadow: index !== 0 ? `0 0 0 ${index * 1.5}px rgba(0,0,0,0.1)` : '0 0 10px rgba(0,0,0,0.3)',
-              borderRadius: '12px'
-            }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            style={{ zIndex: cards.length - index }}
           >
             <Image
               src={image}
               alt={`Card ${index + 1}`}
-              width={500}
-              height={300}
-              className="rounded-lg"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 450px"
+              className="rounded-lg shadow-lg object-cover"
               priority={index === 0}
             />
           </motion.div>

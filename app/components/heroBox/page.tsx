@@ -1,28 +1,28 @@
 'use client';
 import React from 'react';
-import Image from 'next/image';
 import Card1 from '../card1/page';
 import StackedCards from '../StackedCards/page';
 import { motion } from 'framer-motion';
 
 const HeroBox = () => {
   return (
-    <div className="relative bg-gradient-to-br from-blue-800 to-blue-500 min-h-screen py-12">
+    <div className="relative bg-gradient-to-br from-blue-800 to-blue-500 min-h-screen py-12 overflow-hidden">
+      
       {/* First Section (Text & Button) */}
-      <div className="h-[calc(100vh-64px)] flex justify-between items-center px-8">
+      <div className="flex flex-col lg:flex-row justify-between items-center h-[calc(100vh-64px)]">
         
         {/* Animated Content */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center items-center text-white">
+        <div className="relative z-10 flex-1 flex flex-col justify-center items-center text-white mb-10 lg:mb-0">
           <motion.div 
-            className="w-full max-w-lg"
+            className="w-full max-w-lg text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-center mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Welcome to EduTech Solutions
             </h1>
-            <p className="text-xl md:text-2xl text-center mb-8 max-w-2xl">
+            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
               Transforming education through innovative technology solutions
             </p>
             <div className="flex justify-center">
@@ -37,20 +37,28 @@ const HeroBox = () => {
           </motion.div>
         </div>
 
-        {/* Stacked Cards Section - Centered */}
-        <div className="flex-1 flex justify-center items-center">
-          <StackedCards />
-        </div>
+        {/* Stacked Cards Section */}
+        <motion.div
+          className="flex-1 flex justify-center items-center mt-10 lg:mt-0 lg:pt-10"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <div className="relative lg:top-0 top-[-70px] w-full max-w-[320px] px-4 md:max-w-[500px]"> 
+            {/* Reduced width for mobile mode with max-w-[320px] */}
+            <StackedCards />
+          </div>
+        </motion.div>
       </div>
 
       {/* Animated Cards Section */}
       <motion.div 
-        className="absolute bottom-0 left-0 right-0 z-20 w-full flex justify-center" 
+        className="absolute left-0 right-0 z-20 w-full flex justify-center px-4 top-[85%] md:top-[80%]" 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
       >
-        <div className="mx-auto px-4 max-w-7xl">
+        <div className="mx-auto max-w-7xl mb-4 md:mb-0">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             <div className="w-full sm:w-3/4 lg:w-full"><Card1 /></div>
             <div className="w-full sm:w-3/4 lg:w-full"><Card1 /></div>
