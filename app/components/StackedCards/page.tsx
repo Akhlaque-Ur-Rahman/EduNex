@@ -5,11 +5,12 @@ import Image from 'next/image';
 
 const StackedCards: React.FC = () => {
   const cardImages = [
-    '/resources/Community-Home.svg',
-    '/resources/Community-Posts2.svg',
-    '/resources/Community-Shorts.svg',
-    '/resources/Products-Exams.svg',
-    '/resources/Products-TestSeries.svg',
+    '/resources/Community-Home.jpg',
+    '/resources/Community-Posts2.jpg',
+    '/resources/Community-Shorts.jpg',
+    '/resources/Products-Exams.jpg',
+    '/resources/Products-TestSeries.jpg',
+    '/resources/Dashboard.jpg',
   ];
 
   const [cards, setCards] = useState(cardImages);
@@ -22,7 +23,12 @@ const StackedCards: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-10">
+    <div className="flex justify-center items-center mt-10 relative">
+      {/* Shadow below the entire stack */}
+      <div 
+        className="absolute w-[480px] h-[40px] bg-black opacity-30 blur-md rounded-full -bottom-14 z-0"  // Increased bottom margin
+      />
+
       <div 
         className="relative w-[450px] h-[280px] cursor-pointer"  // Landscape size
         onClick={handleCardClick}

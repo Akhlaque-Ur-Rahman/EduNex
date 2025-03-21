@@ -6,13 +6,14 @@ import { motion } from 'framer-motion';
 
 const HeroBox = () => {
   return (
-    <div className="relative bg-gradient-to-br from-blue-800 to-blue-500 min-h-screen py-12 overflow-hidden">
-      
+    <div className="relative bg-gradient-to-br from-blue-800 to-blue-500 min-h-screen py-12 overflow-x-hidden herobox-scrollbar-hide"> 
+      {/* Allow vertical scrolling while hiding horizontal overflow */}
+
       {/* First Section (Text & Button) */}
-      <div className="flex flex-col lg:flex-row justify-between items-center h-[calc(100vh-64px)]">
+      <div className="flex flex-col lg:flex-row justify-between items-center min-h-[calc(100vh-64px)]">
         
         {/* Animated Content */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center items-center text-white mb-10 lg:mb-0">
+        <div className="relative z-10 flex-1 flex flex-col justify-center items-center text-white pt-6 lg:mb-0">
           <motion.div 
             className="w-full max-w-lg text-center"
             initial={{ opacity: 0, y: 30 }}
@@ -29,7 +30,7 @@ const HeroBox = () => {
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-lg transition-colors cursor-pointer"
               >
                 Get Started
               </motion.button>
@@ -44,16 +45,24 @@ const HeroBox = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="relative lg:top-0 top-[-70px] w-full max-w-[320px] px-4 md:max-w-[500px]"> 
-            {/* Reduced width for mobile mode with max-w-[320px] */}
-            <StackedCards />
+          {/* Mobile Mode - Landscape Adjustment */}
+          <div className="relative lg:top-0 top-[-70px] w-full px-4 md:max-w-[500px] max-w-[320px]"> 
+            <div className="block md:hidden px-4"> {/* Mobile View */}
+              <div className="w-full h-[180px] sm:h-[220px] flex justify-center items-center"> {/* Landscape style */}
+                <StackedCards />
+              </div>
+            </div>
+
+            <div className="hidden md:block"> {/* Desktop View */}
+              <StackedCards />
+            </div>
           </div>
         </motion.div>
       </div>
 
       {/* Animated Cards Section */}
       <motion.div 
-        className="absolute left-0 right-0 z-20 w-full flex justify-center px-4 top-[85%] md:top-[80%]" 
+        className="absolute left-0 right-0 z-20 w-full flex justify-center px-4 top-full md:top-[80%]" 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}

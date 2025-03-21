@@ -13,3 +13,11 @@ nav{
 }
 
 
+/* Hide scrollbar specifically for HeroBox */
+.herobox-scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.herobox-scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
