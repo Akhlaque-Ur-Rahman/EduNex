@@ -21,3 +21,17 @@ nav{
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
 }
+.group:hover::after {
+          width: 100%;
+        }
+        .group::after {
+          content: '';
+          display: block;
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          height: 2px;
+          background-color: black;
+          width: 0%;
+          transition: width 0.3s;
+        }

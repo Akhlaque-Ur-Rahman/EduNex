@@ -104,68 +104,89 @@ const Navbar: FC = () => {
             ))}
           </div>
 
-          <div className="flex items-center gap-4 pr-4 ml-12 mr-10">
-            <FaFacebook className="w-6 h-6 cursor-pointer" />
-            <FaInstagram className="w-6 h-6 cursor-pointer" />
-            <FaLinkedinIn className="w-6 h-6 cursor-pointer" />
-            <FaXTwitter className="w-6 h-6 cursor-pointer" />
-          </div>
+          {/* Desktop Social Icons with Independent Floating Animation */}
+{/* Desktop Social Icons with Hover-Triggered Floating Animation */}
+{/* Desktop Social Icons with Smooth Floating Animation */}
+<div className="flex items-center gap-4 pr-4 ml-12 mr-10">
+  {[
+    { Icon: FaFacebook },
+    { Icon: FaInstagram },
+    { Icon: FaLinkedinIn },
+    { Icon: FaXTwitter },
+  ].map(({ Icon }, index) => (
+    <motion.div
+      key={index}
+      whileHover={{ y: -5 }}
+      transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+    >
+      <Icon className="w-6 h-6 cursor-pointer" />
+    </motion.div>
+  ))}
+</div>
+
+
+
         </div>
       </div>
 
       {/* Mobile Menu Drawer */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ x: '-100%' }}
-          animate={{ x: 0 }}
-          exit={{ x: '-100%' }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 bg-blue-950 z-40 flex flex-col w-[80%] h-full p-4 transition-transform duration-300 transform"
+      {/* Mobile Menu Drawer */}
+<AnimatePresence>
+  {isMobileMenuOpen && (
+    <motion.div
+      key="mobile-menu"
+      initial={{ x: '-100%' }}
+      animate={{ x: 0 }}
+      exit={{ x: '-100%' }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      className="fixed inset-0 bg-blue-950 z-40 flex flex-col w-[80%] h-full p-4 transition-transform duration-300 transform"
+    >
+      {/* Navigation Links */}
+      <div className="flex flex-col items-start gap-4 mt-14 text-white">
+        {['home', 'services', 'clients', 'contact'].map((item) => (
+          <motion.div
+            key={item}
+            whileHover={{ scale: 1.02, x: 5 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+            onClick={() => handleNavigation(item)}
+            className="text-lg cursor-pointer hover:underline"
+          >
+            {item.charAt(0).toUpperCase() + item.slice(1)}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Social Icons */}
+      <div className="flex gap-6 mt-8 text-white">
+        <motion.div whileHover={{ y: -5 }}><FaFacebook className="w-7 h-7 cursor-pointer" /></motion.div>
+        <motion.div whileHover={{ y: -5 }}><FaInstagram className="w-7 h-7 cursor-pointer" /></motion.div>
+        <motion.div whileHover={{ y: -5 }}><FaLinkedinIn className="w-7 h-7 cursor-pointer" /></motion.div>
+        <motion.div whileHover={{ y: -5 }}><FaXTwitter className="w-7 h-7 cursor-pointer" /></motion.div>
+      </div>
+
+      {/* Sign Up & Login Buttons */}
+      <div className="flex gap-4 mt-auto w-full mb-2 p-2">
+        <motion.button
+          whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgba(0, 128, 0, 0.6)" }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => handleNavigation('signup')}
+          className="bg-emerald-600 text-white py-2 px-4 rounded hover:bg-emerald-700 transition-colors w-full cursor-pointer"
         >
-          {/* Navigation Links */}
-          <div className="flex flex-col items-start gap-4 mt-14 text-white">
-            {['home', 'services', 'clients', 'contact'].map((item) => (
-              <motion.div
-                key={item}
-                whileHover={{ scale: 1.02, x: 5 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-                onClick={() => handleNavigation(item)}
-                className="text-lg cursor-pointer hover:underline"
-              >
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-              </motion.div>
-            ))}
-          </div>
+          Sign Up
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgba(0, 0, 255, 0.6)" }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => handleNavigation('login')}
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors w-full cursor-pointer"
+        >
+          Login
+        </motion.button>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
-          {/* Social Icons */}
-          <div className="flex gap-6 mt-8 text-white ml-">
-            <motion.div whileHover={{ y: -5 }}><FaFacebook className="w-7 h-7 cursor-pointer" /></motion.div>
-            <motion.div whileHover={{ y: -5 }}><FaInstagram className="w-7 h-7 cursor-pointer" /></motion.div>
-            <motion.div whileHover={{ y: -5 }}><FaLinkedinIn className="w-7 h-7 cursor-pointer" /></motion.div>
-            <motion.div whileHover={{ y: -5 }}><FaXTwitter className="w-7 h-7 cursor-pointer" /></motion.div>
-          </div>
-
-          {/* Sign Up & Login Buttons */}
-          <div className="flex gap-4 mt-auto w-full mb-2 p-2">
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgba(0, 128, 0, 0.6)" }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleNavigation('signup')}
-              className="bg-emerald-600 text-white py-2 px-4 rounded hover:bg-emerald-700 transition-colors w-full cursor-pointer"
-            >
-              Sign Up
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgba(0, 0, 255, 0.6)" }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleNavigation('login')}
-              className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors w-full cursor-pointer"
-            >
-              Login
-            </motion.button>
-          </div>
-        </motion.div>
-      )}
     </motion.nav>
   );
 };
