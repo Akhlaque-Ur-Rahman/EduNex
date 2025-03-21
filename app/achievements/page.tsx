@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from '../components/navbar/page'
-import HeroBox from '../components/heroBox/page'
+import Navbar from '../components/navbar/navBar'
+import HeroBox from '../components/heroBox/heroBox'
 
 const AchievementsPage = () => {
   return (

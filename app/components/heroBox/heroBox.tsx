@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import Card1 from '../card1/page';
-import StackedCards from '../StackedCards/page';
+import Card1 from '../card1/Card1';
+import StackedCards from '../StackedCards/stackedCards';
 import { motion } from 'framer-motion';
 
 const HeroBox = () => {

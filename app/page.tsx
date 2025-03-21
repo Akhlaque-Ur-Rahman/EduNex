@@ -1,5 +1,5 @@
-import Navbar from "./components/navbar/page";
-import HeroBox from "./components/heroBox/page";
+import Navbar from "./components/navbar/navBar";
+import HeroBox from "./components/heroBox/heroBox";
 
 export default function Home() {
   return (

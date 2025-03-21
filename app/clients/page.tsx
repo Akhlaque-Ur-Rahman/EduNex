@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaTools } from "react-icons/fa";
-import Navbar from '../components/navbar/page'
+import Navbar from '../components/navbar/navBar'
 const clientsPage = () => {
   return (
     <div>
