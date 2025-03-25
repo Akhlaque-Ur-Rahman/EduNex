@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 const HeroBox = () => {
   return (
-    <div className="relative bg-gradient-to-br from-blue-800 to-blue-500 min-h-screen py-12 overflow-x-hidden herobox-scrollbar-hide"> 
+    <div className="relative bg-gradient-to-br from-blue-800 to-blue-500 min-h-screen py-12 mb-12 herobox-scrollbar-hide"> 
       {/* Allow vertical scrolling while hiding horizontal overflow */}
 
       {/* First Section (Text & Button) */}
@@ -62,19 +62,38 @@ const HeroBox = () => {
 
       {/* Animated Cards Section */}
       <motion.div 
-        className="absolute left-0 right-0 z-20 w-full flex justify-center px-4 top-full md:top-[80%]" 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-      >
-        <div className="mx-auto max-w-7xl mb-4 md:mb-0">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-            <div className="w-full sm:w-3/4 lg:w-full"><Card1 /></div>
-            <div className="w-full sm:w-3/4 lg:w-full"><Card1 /></div>
-            <div className="w-full sm:w-3/4 lg:w-full"><Card1 /></div>
-          </div>
-        </div>
-      </motion.div>
+  className="w-full flex justify-center px-4 md:absolute left-0 right-0 md:top-[80%] z-20"
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.5 }}
+>
+  <div className="mx-auto max-w-7xl mb-4 md:mb-0">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+      <div className="w-full sm:w-3/4 lg:w-full">
+        <Card1 
+          title="AI-Powered Learning" 
+          description="Enhance your learning with AI-driven personalized study plans." 
+          buttonText="Explore AI Tools" 
+        />
+      </div>
+      <div className="w-full sm:w-3/4 lg:w-full">
+        <Card1 
+          title="Virtual Classrooms" 
+          description="Engage with interactive online sessions and real-time discussions." 
+          buttonText="Join Now" 
+        />
+      </div>
+      <div className="w-full sm:w-3/4 lg:w-full">
+        <Card1 
+          title="Gamified Education" 
+          description="Boost engagement with fun and interactive learning modules." 
+          buttonText="Start Playing" 
+        />
+      </div>
+    </div>
+  </div>
+</motion.div>
+
     </div>
   );
 };
