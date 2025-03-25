@@ -11,19 +11,19 @@ const ServicesSection: FC = () => {
       title: "SEO Optimization",
       description: "Enhancing your website's visibility with optimized content and meta tags for better search engine ranking.",
       moreInfo: "We use advanced tools and techniques to boost your search engine ranking and drive more organic traffic to your platform.",
-      image: "/resources/seminar.jpg",  // Replace with your actual image path
+      image: "/resources/seminar.jpg",  
     },
     {
       title: "Web Design",
       description: "Creating modern, responsive websites that engage users and showcase your educational offerings effectively.",
       moreInfo: "We create seamless, attractive, and user-friendly interfaces that leave lasting impressions on your audience.",
-      image: "/resources/codinglaptop.jpg",  // Replace with your actual image path
+      image: "/resources/codinglaptop.jpg",  
     },
     {
       title: "CMS",
       description: "Creating modern, responsive websites that engage users and showcase your educational offerings effectively.",
       moreInfo: "We create seamless, attractive, and user-friendly interfaces that leave lasting impressions on your audience.",
-      image: "/resources/seminar.jpg",  // Replace with your actual image path
+      image: "/resources/seminar.jpg",  
     },
   ];
 
@@ -52,6 +52,7 @@ const ServicesSection: FC = () => {
               src={service.image}
               alt={service.title}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover"
               priority={service.image === '/resources/seminar.jpg'}
             />

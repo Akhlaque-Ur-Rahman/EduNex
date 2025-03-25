@@ -21,21 +21,23 @@ const Navbar: FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
+      setIsScrolled(window.scrollY > 50); // Activate sticky when scrolling down
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 bg-white shadow-md ${isScrolled ? 'shadow-lg' : ''}`}
+      initial={{ y: 0 }}
+      animate={{ y: isScrolled ? 0 : 0 }} // No sudden jumps
+      className={`top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'fixed bg-white shadow-md py-2' : 'static bg-transparent py-4'
+      }`}
     >
-      <div className="flex items-center justify-between px-4 py-2">
-        {/* Mobile Mode: Menu Icon & Logo */}
+      <div className="flex items-center justify-between px-4">
+        {/* Mobile: Menu & Logo */}
         <div className="flex items-center justify-between w-full lg:hidden relative z-50">
           <motion.div
             whileHover={{ scale: 1.1 }}
@@ -80,7 +82,7 @@ const Navbar: FC = () => {
           />
         </div>
 
-        {/* Desktop Mode: Logo, Nav Links, Social Icons */}
+        {/* Desktop: Logo, Links, Social Icons */}
         <div className="hidden lg:flex items-center justify-between w-full">
           <Image
             src="/resources/EduNexLogo.svg"
@@ -97,96 +99,89 @@ const Navbar: FC = () => {
               <div
                 key={item}
                 onClick={() => handleNavigation(item)}
-                className={`cursor-pointer ${pathname === (item === 'home' ? '/' : `/${item}`) ? 'text-black font-bold underline' : 'text-gray-700'} hover:underline`}
+                className={`cursor-pointer ${
+                  pathname === (item === 'home' ? '/' : `/${item}`)
+                    ? 'text-black font-bold underline'
+                    : 'text-gray-700'
+                } hover:underline`}
               >
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </div>
             ))}
           </div>
 
-          {/* Desktop Social Icons with Independent Floating Animation */}
-{/* Desktop Social Icons with Hover-Triggered Floating Animation */}
-{/* Desktop Social Icons with Smooth Floating Animation */}
-<div className="flex items-center gap-4 pr-4 ml-12 mr-10">
-  {[
-    { Icon: FaFacebook },
-    { Icon: FaInstagram },
-    { Icon: FaLinkedinIn },
-    { Icon: FaXTwitter },
-  ].map(({ Icon }, index) => (
-    <motion.div
-      key={index}
-      whileHover={{ y: -5 }}
-      transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-    >
-      <Icon className="w-6 h-6 cursor-pointer" />
-    </motion.div>
-  ))}
-</div>
-
-
-
+          {/* Social Icons */}
+          <div className="flex items-center gap-4 pr-4 ml-12 mr-10">
+            {[FaFacebook, FaInstagram, FaLinkedinIn, FaXTwitter].map((Icon, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ y: -5 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+              >
+                <Icon className="w-6 h-6 cursor-pointer" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Mobile Menu Drawer */}
-      {/* Mobile Menu Drawer */}
-<AnimatePresence>
-  {isMobileMenuOpen && (
-    <motion.div
-      key="mobile-menu"
-      initial={{ x: '-100%' }}
-      animate={{ x: 0 }}
-      exit={{ x: '-100%' }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="fixed inset-0 bg-blue-950 z-40 flex flex-col w-[80%] h-full p-4 transition-transform duration-300 transform"
-    >
-      {/* Navigation Links */}
-      <div className="flex flex-col items-start gap-4 mt-14 text-white">
-        {['home', 'services', 'clients', 'contact'].map((item) => (
+      <AnimatePresence>
+        {isMobileMenuOpen && (
           <motion.div
-            key={item}
-            whileHover={{ scale: 1.02, x: 5 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-            onClick={() => handleNavigation(item)}
-            className="text-lg cursor-pointer hover:underline"
+            key="mobile-menu"
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed inset-0 bg-blue-950 z-40 flex flex-col w-[80%] h-full p-4 transition-transform duration-300 transform"
           >
-            {item.charAt(0).toUpperCase() + item.slice(1)}
+            {/* Navigation Links */}
+            <div className="flex flex-col items-start gap-4 mt-14 text-white">
+              {['home', 'services', 'clients', 'contact'].map((item) => (
+                <motion.div
+                  key={item}
+                  whileHover={{ scale: 1.02, x: 5 }}
+                  transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+                  onClick={() => handleNavigation(item)}
+                  className="text-lg cursor-pointer hover:underline"
+                >
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Social Icons */}
+            <div className="flex gap-6 mt-8 text-white">
+              {[FaFacebook, FaInstagram, FaLinkedinIn, FaXTwitter].map((Icon, index) => (
+                <motion.div key={index} whileHover={{ y: -5 }}>
+                  <Icon className="w-7 h-7 cursor-pointer" />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Sign Up & Login Buttons */}
+            <div className="flex gap-4 mt-auto w-full mb-2 p-2">
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: '0px 0px 8px rgba(0, 128, 0, 0.6)' }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleNavigation('signup')}
+                className="bg-emerald-600 text-white py-2 px-4 rounded hover:bg-emerald-700 transition-colors w-full cursor-pointer"
+              >
+                Sign Up
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: '0px 0px 8px rgba(0, 0, 255, 0.6)' }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleNavigation('login')}
+                className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors w-full cursor-pointer"
+              >
+                Login
+              </motion.button>
+            </div>
           </motion.div>
-        ))}
-      </div>
-
-      {/* Social Icons */}
-      <div className="flex gap-6 mt-8 text-white">
-        <motion.div whileHover={{ y: -5 }}><FaFacebook className="w-7 h-7 cursor-pointer" /></motion.div>
-        <motion.div whileHover={{ y: -5 }}><FaInstagram className="w-7 h-7 cursor-pointer" /></motion.div>
-        <motion.div whileHover={{ y: -5 }}><FaLinkedinIn className="w-7 h-7 cursor-pointer" /></motion.div>
-        <motion.div whileHover={{ y: -5 }}><FaXTwitter className="w-7 h-7 cursor-pointer" /></motion.div>
-      </div>
-
-      {/* Sign Up & Login Buttons */}
-      <div className="flex gap-4 mt-auto w-full mb-2 p-2">
-        <motion.button
-          whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgba(0, 128, 0, 0.6)" }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => handleNavigation('signup')}
-          className="bg-emerald-600 text-white py-2 px-4 rounded hover:bg-emerald-700 transition-colors w-full cursor-pointer"
-        >
-          Sign Up
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgba(0, 0, 255, 0.6)" }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => handleNavigation('login')}
-          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors w-full cursor-pointer"
-        >
-          Login
-        </motion.button>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };

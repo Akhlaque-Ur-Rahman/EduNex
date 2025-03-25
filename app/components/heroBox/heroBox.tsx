@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 const HeroBox = () => {
   return (
-    <div className="relative bg-gradient-to-br from-blue-800 to-blue-500 min-h-screen py-12 mb-12 herobox-scrollbar-hide"> 
+    <div className="relative bg-gradient-to-br from-blue-800 to-blue-500 min-h-screen  mb-12 herobox-scrollbar-hide"> 
       {/* Allow vertical scrolling while hiding horizontal overflow */}
 
       {/* First Section (Text & Button) */}
