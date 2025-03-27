@@ -30,12 +30,11 @@ const Navbar: FC = () => {
 
   return (
     <motion.nav
-      initial={{ y: 0 }}
-      animate={{ y: isScrolled ? 0 : 0 }} // No sudden jumps
-      className={`top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'fixed bg-white shadow-md py-2' : 'static bg-transparent py-4'
-      }`}
-    >
+  initial={{ y: 0 }}
+  animate={{ y: 0 }} 
+  className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-md py-2`}
+>
+
       <div className="flex items-center justify-between px-4">
         {/* Mobile: Menu & Logo */}
         <div className="flex items-center justify-between w-full lg:hidden relative z-50">

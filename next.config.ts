@@ -4,11 +4,15 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cdn-icons-png.flaticon.com",
+        hostname: "upload.wikimedia.org", // For client logos
       },
       {
         protocol: "https",
-        hostname: "upload.wikimedia.org",
+        hostname: "cdn-icons-png.flaticon.com", // For industry icons
+      },
+      {
+        protocol: "https",
+        hostname: "randomuser.me", // For testimonial images
       },
     ],
   },

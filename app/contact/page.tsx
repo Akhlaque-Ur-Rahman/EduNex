@@ -1,11 +1,12 @@
 import React from "react";
 import Navbar from "../components/navbar/navBar";
+import Footer from "../components/footer";
 
 const ContactPage = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
-      <div className="container mx-auto px-4 flex flex-col items-center">
+      <div className="container mx-auto px-4 flex flex-col items-center pt-24 pb-4">
         {/* Page Heading */}
         <h1 className="text-4xl font-bold text-center text-blue-800 mb-8">
           Get in Touch
@@ -155,6 +156,7 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
