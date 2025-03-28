@@ -37,6 +37,7 @@ const AboutSection: FC = () => {
             alt="Desktop UI"
             width={500}
             height={300}
+            style={{ width: '100%', height: '100%' }}
             className="rounded-xl object-cover"
           />
         </motion.div>

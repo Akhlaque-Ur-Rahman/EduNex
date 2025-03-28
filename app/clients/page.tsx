@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -57,7 +57,7 @@ export default function ClientsPage() {
 
       <main className="w-full overflow-hidden">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-blue-600 to-blue-900 text-white py-20 text-center">
+        <section className="relative bg-gradient-to-r from-blue-600 to-blue-900 text-white py-24 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -94,26 +94,6 @@ export default function ClientsPage() {
             ))}
           </div>
         </section>
-
-        {/* Industries Served */}
-        <section className="py-16 bg-gray-100 px-4 md:px-20">
-          <h2 className="text-3xl font-bold text-center mb-10">Industries We Serve</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-            {industries.map((industry, index) => (
-              <motion.div
-                key={index}
-                className="p-6 bg-blue-100 shadow-lg rounded-lg cursor-pointer flex flex-col items-center"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 200, damping: 10 }}
-              >
-                <Image src={industry.icon} alt={industry.name} width={60} height={60} className="object-contain" />
-                <p className="mt-2 text-gray-700">{industry.name}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        
 
         {/* Our Clients - Full Width Auto Carousel */}
         <section className="py-16 bg-gray-100">

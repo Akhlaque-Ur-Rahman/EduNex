@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "randomuser.me", // For testimonial images
       },
+      {
+        protocol: "https",
+        hostname: "picsum.photos", // For success story images
+      },
     ],
   },
 };

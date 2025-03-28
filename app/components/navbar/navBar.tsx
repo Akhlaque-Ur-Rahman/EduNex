@@ -1,6 +1,6 @@
 'use client';
 import { FC, useState, useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation'; // Removed useRouter
 import { X, Menu } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
 import Image from 'next/image';
@@ -9,32 +9,36 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Navbar: FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname();
-  const router = useRouter();
+  const pathname = usePathname(); // Removed useRouter
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   const handleNavigation = (path: string) => {
-    router.push(path === 'home' ? '/' : `/${path}`);
+    window.location.href = path === 'home' ? '/' : `/${path}`;
     setIsMobileMenuOpen(false);
+    setTimeout(() => {
+      document.documentElement.scrollTop = 0; // Ensures scrolling works even when sticky/fixed
+    }, 50);
   };
 
+  // Scroll Event Listener
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50); // Activate sticky when scrolling down
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Reset Scroll Position on Route Change
+  useEffect(() => {
+    document.documentElement.scrollTop = 0;
+  }, [pathname]); // Runs whenever the route changes
+
   return (
     <motion.nav
-  initial={{ y: 0 }}
-  animate={{ y: 0 }} 
-  className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-md py-2`}
->
-
+      initial={{ y: 0 }}
+      animate={{ y: 0 }} 
+      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-md py-2`}
+    >
       <div className="flex items-center justify-between px-4">
         {/* Mobile: Menu & Logo */}
         <div className="flex items-center justify-between w-full lg:hidden relative z-50">
