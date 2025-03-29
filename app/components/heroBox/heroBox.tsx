@@ -6,9 +6,10 @@ import { motion } from 'framer-motion';
 
 const HeroBox = () => {
   return (
-    <div className="relative bg-gradient-to-br from-blue-800 to-blue-500 min-h-screen mb-12 herobox-scrollbar-hide flex flex-col justify-between">
+    <div className="relative bg-gradient-to-br from-blue-800 to-blue-500 min-h-screen flex flex-col justify-between">
+      
       {/* First Section (Text & Stacked Cards) */}
-      <div className="w-full flex flex-col lg:flex-row items-center justify-between min-h-[calc(100vh-64px)] px-6 md:px-12 lg:px-20 xl:px-32">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-between max-sm:py-24 px-6 md:px-12 lg:px-20 xl:px-32 min-h-[calc(100vh-64px)]">
         
         {/* Left Section: Text & Button */}
         <motion.div
@@ -34,12 +35,12 @@ const HeroBox = () => {
 
         {/* Right Section: Stacked Cards */}
         <motion.div
-          className="w-full lg:w-1/2 flex justify-center lg:justify-end items-center mt-10 lg:mt-0"
+          className="w-full lg:w-1/2 flex justify-center lg:justify-end items-center mt-6 lg:mt-0"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-[450px] px-4 flex justify-center">
+          <div className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-[450px] flex justify-center">
             <StackedCards />
           </div>
         </motion.div>
@@ -48,13 +49,13 @@ const HeroBox = () => {
 
       {/* Second Section: Animated Cards */}
       <motion.div 
-        className="w-full flex justify-center px-4 md:absolute left-0 right-0 md:top-[80%] z-20"
+        className="w-full flex justify-center px-4 md:mt-10 mt-6 z-20"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
       >
-        <div className="mx-auto max-w-7xl mb-4 md:mb-0">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center">
             <div className="w-full sm:w-3/4 lg:w-full">
               <Card1 
                 title="AI-Powered Learning" 
